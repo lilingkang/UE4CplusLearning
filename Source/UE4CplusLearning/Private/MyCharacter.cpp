@@ -13,8 +13,10 @@ AMyCharacter::AMyCharacter()
 	PrimaryActorTick.bCanEverTick = true;
 
 	SpringArmComp = CreateDefaultSubobject<USpringArmComponent>("SpringArmComp");
+	SpringArmComp->SetupAttachment(RootComponent);
 
 	CameraComp = CreateDefaultSubobject<UCameraComponent>("CameraComp");
+	CameraComp->SetupAttachment(SpringArmComp);
 }
 
 // Called when the game starts or when spawned
@@ -22,6 +24,11 @@ void AMyCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	
+}
+
+void AMyCharacter::MoveForward(float value)
+{
+	AddMovementInput(GetActorForwardVector(), value);
 }
 
 // Called every frame
@@ -35,6 +42,10 @@ void AMyCharacter::Tick(float DeltaTime)
 void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
+
+	PlayerInputComponent->BindAxis("MoveForward", this, &AMyCharacter::MoveForward);
+
+	PlayerInputComponent->BindAxis("Turn", this, &APawn::AddControllerYawInput);
 
 }
 

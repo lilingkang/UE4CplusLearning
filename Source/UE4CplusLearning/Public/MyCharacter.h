@@ -19,12 +19,16 @@ public:
 	AMyCharacter();
 
 protected:
+	UPROPERTY(VisibleAnywhere)
 	USpringArmComponent* SpringArmComp;
 
+	UPROPERTY(VisibleAnywhere)
 	UCameraComponent* CameraComp;
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+	void MoveForward(float value);
 
 public:	
 	// Called every frame
