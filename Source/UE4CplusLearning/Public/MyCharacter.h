@@ -6,6 +6,9 @@
 #include "GameFramework/Character.h"
 #include "MyCharacter.generated.h"
 
+class USpringArmComponent;
+class UCameraComponent;
+
 UCLASS()
 class UE4CPLUSLEARNING_API AMyCharacter : public ACharacter
 {
@@ -16,6 +19,10 @@ public:
 	AMyCharacter();
 
 protected:
+	USpringArmComponent* SpringArmComp;
+
+	UCameraComponent* CameraComp;
+
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
